@@ -23,9 +23,22 @@ places_agent = Agent(
     name="places_agent",
     description="Suggests locations based on user preferences",
     instruction="""
+
             You are responsible for making suggestions on actual places based on the user's query. Limit the choices to 10 results.
             Each place must have a name, location, and address.
             You can use the places_tool to find the latitude and longitude of the place and address.
+            You receive input in this format:
+            {
+            "city": "string",
+            "landmark_name": "string",
+            "intent": "restaurant | attraction"
+            "longitude": "float",
+            "latitude": "float"
+            }
+
+            If any field is missing, return an error JSON.
+            Respond ONLY in JSON.
+
         """,
     tools=[location_search_tool]    
 )
